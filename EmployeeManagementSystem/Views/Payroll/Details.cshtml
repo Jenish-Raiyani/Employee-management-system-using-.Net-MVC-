@@ -1,0 +1,123 @@
+﻿@model EmployeeManagementSystem.t_payroll
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>t_payroll</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NetSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NetSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.E_Basic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.E_Basic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.E_DA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.E_DA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.E_HRA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.E_HRA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.E_Conveyance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.E_Conveyance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total_Earnings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total_Earnings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.E_Allowance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.E_Allowance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.D_TDS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.D_TDS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.D_ESI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.D_ESI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.D_PF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.D_PF)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total_Deductions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total_Deductions)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PaymentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

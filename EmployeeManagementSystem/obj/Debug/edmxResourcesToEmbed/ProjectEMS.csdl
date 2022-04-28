@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectEMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="HR_SignUp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mobileno" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="t_Departments" Relationship="Self.FK__t_Departm__RefHR__2D27B809" FromRole="HR_SignUp" ToRole="t_Departments" />
+    <NavigationProperty Name="t_Employees" Relationship="Self.FK__t_Employe__RefHR__38996AB5" FromRole="HR_SignUp" ToRole="t_Employees" />
+  </EntityType>
+  <EntityType Name="t_Departments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HOD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RefHRID" Type="Int32" />
+    <Property Name="Department" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HR_SignUp" Relationship="Self.FK__t_Departm__RefHR__2D27B809" FromRole="t_Departments" ToRole="HR_SignUp" />
+  </EntityType>
+  <EntityType Name="t_Employees">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RefHRID" Type="Int32" />
+    <Property Name="Firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Mobileno" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="JoiningDate" Type="DateTime" Precision="0" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="HR_SignUp" Relationship="Self.FK__t_Employe__RefHR__38996AB5" FromRole="t_Employees" ToRole="HR_SignUp" />
+    <NavigationProperty Name="t_PersonalInformations" Relationship="Self.FK__t_Persona__Emplo__49C3F6B7" FromRole="t_Employees" ToRole="t_PersonalInformations" />
+  </EntityType>
+  <EntityType Name="t_PersonalInformations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+    <Property Name="PassportNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Passport_Exp_Date" Type="DateTime" Precision="0" />
+    <Property Name="Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Religion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Maritalstatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="t_Employees" Relationship="Self.FK__t_Persona__Emplo__49C3F6B7" FromRole="t_PersonalInformations" ToRole="t_Employees" />
+  </EntityType>
+  <Association Name="FK__t_Departm__RefHR__2D27B809">
+    <End Role="HR_SignUp" Type="Self.HR_SignUp" Multiplicity="0..1" />
+    <End Role="t_Departments" Type="Self.t_Departments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HR_SignUp">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="t_Departments">
+        <PropertyRef Name="RefHRID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__t_Employe__RefHR__38996AB5">
+    <End Role="HR_SignUp" Type="Self.HR_SignUp" Multiplicity="0..1" />
+    <End Role="t_Employees" Type="Self.t_Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HR_SignUp">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="t_Employees">
+        <PropertyRef Name="RefHRID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__t_Persona__Emplo__49C3F6B7">
+    <End Role="t_Employees" Type="Self.t_Employees" Multiplicity="1" />
+    <End Role="t_PersonalInformations" Type="Self.t_PersonalInformations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Employees">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="t_PersonalInformations">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProjectEMSEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="HR_SignUp" EntityType="Self.HR_SignUp" />
+    <EntitySet Name="t_Departments" EntityType="Self.t_Departments" />
+    <EntitySet Name="t_Employees" EntityType="Self.t_Employees" />
+    <EntitySet Name="t_PersonalInformations" EntityType="Self.t_PersonalInformations" />
+    <AssociationSet Name="FK__t_Departm__RefHR__2D27B809" Association="Self.FK__t_Departm__RefHR__2D27B809">
+      <End Role="HR_SignUp" EntitySet="HR_SignUp" />
+      <End Role="t_Departments" EntitySet="t_Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__t_Employe__RefHR__38996AB5" Association="Self.FK__t_Employe__RefHR__38996AB5">
+      <End Role="HR_SignUp" EntitySet="HR_SignUp" />
+      <End Role="t_Employees" EntitySet="t_Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__t_Persona__Emplo__49C3F6B7" Association="Self.FK__t_Persona__Emplo__49C3F6B7">
+      <End Role="t_Employees" EntitySet="t_Employees" />
+      <End Role="t_PersonalInformations" EntitySet="t_PersonalInformations" />
+    </AssociationSet>
+    <EntitySet Name="holidays" EntityType="ProjectEMSModel.holiday" />
+    <EntitySet Name="t_leaves" EntityType="ProjectEMSModel.t_leaves" />
+    <EntitySet Name="t_payroll" EntityType="ProjectEMSModel.t_payroll" />
+    <EntitySet Name="sysdiagrams" EntityType="ProjectEMSModel.sysdiagram" />
+  </EntityContainer>
+  <EntityType Name="holiday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Holidaysdate" Type="DateTime" Precision="0" />
+    <Property Name="Day" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="t_leaves">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+    <Property Name="LeaveType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="FromDate" Type="DateTime" Precision="0" />
+    <Property Name="ToDate" Type="DateTime" Precision="0" />
+    <Property Name="TotalDays" Type="Int32" />
+    <Property Name="Reason" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="t_payroll">
+    <Key>
+      <PropertyRef Name="PaymentId" />
+    </Key>
+    <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Employee_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="NetSalary" Type="Double" />
+    <Property Name="E_Basic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="E_DA" Type="Int32" />
+    <Property Name="E_HRA" Type="Int32" />
+    <Property Name="E_Conveyance" Type="Int32" />
+    <Property Name="Total_Earnings" Type="Int32" />
+    <Property Name="E_Allowance" Type="Int32" />
+    <Property Name="D_TDS" Type="Int32" />
+    <Property Name="D_ESI" Type="Int32" />
+    <Property Name="D_PF" Type="Int32" />
+    <Property Name="Tax" Type="Int32" />
+    <Property Name="Total_Deductions" Type="Int32" />
+    <Property Name="Employee_Id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+</Schema>

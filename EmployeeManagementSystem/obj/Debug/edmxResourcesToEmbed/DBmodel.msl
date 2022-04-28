@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectEMSModelStoreContainer" CdmEntityContainer="ProjectEMSEntities">
+    <EntitySetMapping Name="HR_SignUp">
+      <EntityTypeMapping TypeName="ProjectEMSModel.HR_SignUp">
+        <MappingFragment StoreEntitySet="HR_SignUp">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="mobileno" ColumnName="mobileno" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_Departments">
+      <EntityTypeMapping TypeName="ProjectEMSModel.t_Departments">
+        <MappingFragment StoreEntitySet="t_Departments">
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="RefHRID" ColumnName="RefHRID" />
+          <ScalarProperty Name="HOD" ColumnName="HOD" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_Employees">
+      <EntityTypeMapping TypeName="ProjectEMSModel.t_Employees">
+        <MappingFragment StoreEntitySet="t_Employees">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+          <ScalarProperty Name="Mobileno" ColumnName="Mobileno" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="RefHRID" ColumnName="RefHRID" />
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

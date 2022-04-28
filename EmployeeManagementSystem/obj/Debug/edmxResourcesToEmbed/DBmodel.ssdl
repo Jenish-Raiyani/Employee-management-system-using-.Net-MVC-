@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectEMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="HR_SignUp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="mobileno" Type="nvarchar" MaxLength="15" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_Departments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HOD" Type="nvarchar" MaxLength="20" />
+    <Property Name="RefHRID" Type="int" />
+    <Property Name="Department" Type="nvarchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="t_Employees">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RefHRID" Type="int" />
+    <Property Name="Firstname" Type="nvarchar" MaxLength="20" />
+    <Property Name="Lastname" Type="nvarchar" MaxLength="20" />
+    <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mobileno" Type="nvarchar" MaxLength="15" />
+    <Property Name="JoiningDate" Type="date" />
+    <Property Name="Department" Type="nvarchar" MaxLength="50" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__t_Departm__RefHR__2D27B809">
+    <End Role="HR_SignUp" Type="Self.HR_SignUp" Multiplicity="0..1" />
+    <End Role="t_Departments" Type="Self.t_Departments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HR_SignUp">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="t_Departments">
+        <PropertyRef Name="RefHRID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__t_Employe__RefHR__38996AB5">
+    <End Role="HR_SignUp" Type="Self.HR_SignUp" Multiplicity="0..1" />
+    <End Role="t_Employees" Type="Self.t_Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HR_SignUp">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="t_Employees">
+        <PropertyRef Name="RefHRID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProjectEMSModelStoreContainer">
+    <EntitySet Name="HR_SignUp" EntityType="Self.HR_SignUp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t_Departments" EntityType="Self.t_Departments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t_Employees" EntityType="Self.t_Employees" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__t_Departm__RefHR__2D27B809" Association="Self.FK__t_Departm__RefHR__2D27B809">
+      <End Role="HR_SignUp" EntitySet="HR_SignUp" />
+      <End Role="t_Departments" EntitySet="t_Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__t_Employe__RefHR__38996AB5" Association="Self.FK__t_Employe__RefHR__38996AB5">
+      <End Role="HR_SignUp" EntitySet="HR_SignUp" />
+      <End Role="t_Employees" EntitySet="t_Employees" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

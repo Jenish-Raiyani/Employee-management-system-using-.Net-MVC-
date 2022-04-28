@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectEMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="HR_SignUp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mobileno" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="t_Departments" Relationship="ProjectEMSModel.FK__t_Departm__RefHR__2D27B809" FromRole="HR_SignUp" ToRole="t_Departments" />
+    <NavigationProperty Name="t_Employees" Relationship="ProjectEMSModel.FK__t_Employe__RefHR__2A4B4B5E" FromRole="HR_SignUp" ToRole="t_Employees" />
+  </EntityType>
+  <EntityContainer Name="ProjectEMSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="HR_SignUp" EntityType="Self.HR_SignUp" />
+    <EntitySet Name="t_Departments" EntityType="ProjectEMSModel.t_Departments" />
+    <EntitySet Name="t_Employees" EntityType="ProjectEMSModel.t_Employees" />
+    <AssociationSet Name="FK__t_Departm__RefHR__2D27B809" Association="ProjectEMSModel.FK__t_Departm__RefHR__2D27B809">
+      <End Role="HR_SignUp" EntitySet="HR_SignUp" />
+      <End Role="t_Departments" EntitySet="t_Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__t_Employe__RefHR__2A4B4B5E" Association="ProjectEMSModel.FK__t_Employe__RefHR__2A4B4B5E">
+      <End Role="HR_SignUp" EntitySet="HR_SignUp" />
+      <End Role="t_Employees" EntitySet="t_Employees" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="t_Departments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HOD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RefHRID" Type="Int32" />
+    <Property Name="Department" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HR_SignUp" Relationship="ProjectEMSModel.FK__t_Departm__RefHR__2D27B809" FromRole="t_Departments" ToRole="HR_SignUp" />
+  </EntityType>
+  <EntityType Name="t_Employees">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RefHRID" Type="Int32" />
+    <Property Name="Firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobileno" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="JoiningDate" Type="DateTime" Precision="0" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HR_SignUp" Relationship="ProjectEMSModel.FK__t_Employe__RefHR__2A4B4B5E" FromRole="t_Employees" ToRole="HR_SignUp" />
+  </EntityType>
+  <Association Name="FK__t_Departm__RefHR__2D27B809">
+    <End Type="ProjectEMSModel.HR_SignUp" Role="HR_SignUp" Multiplicity="0..1" />
+    <End Type="ProjectEMSModel.t_Departments" Role="t_Departments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HR_SignUp">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="t_Departments">
+        <PropertyRef Name="RefHRID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__t_Employe__RefHR__2A4B4B5E">
+    <End Type="ProjectEMSModel.HR_SignUp" Role="HR_SignUp" Multiplicity="0..1" />
+    <End Type="ProjectEMSModel.t_Employees" Role="t_Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HR_SignUp">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="t_Employees">
+        <PropertyRef Name="RefHRID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProjectEMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="holidays">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Holidaysdate" Type="date" />
+          <Property Name="Day" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="HR_SignUp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mobileno" Type="nvarchar" MaxLength="15" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="t_Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HOD" Type="nvarchar" MaxLength="20" />
+          <Property Name="RefHRID" Type="int" />
+          <Property Name="Department" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="t_Employees">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefHRID" Type="int" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="20" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="20" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobileno" Type="nvarchar" MaxLength="15" />
+          <Property Name="JoiningDate" Type="date" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_leaves">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_ID" Type="int" Nullable="false" />
+          <Property Name="LeaveType" Type="nvarchar" MaxLength="30" />
+          <Property Name="FromDate" Type="date" />
+          <Property Name="ToDate" Type="date" />
+          <Property Name="TotalDays" Type="int" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="254" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="ApprovedBy" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="t_payroll">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_name" Type="nvarchar" MaxLength="30" />
+          <Property Name="Employee_Id" Type="int" />
+          <Property Name="NetSalary" Type="float" />
+          <Property Name="E_Basic" Type="nvarchar" MaxLength="30" />
+          <Property Name="E_DA" Type="int" />
+          <Property Name="E_HRA" Type="int" />
+          <Property Name="E_Conveyance" Type="int" />
+          <Property Name="Total_Earnings" Type="int" />
+          <Property Name="E_Allowance" Type="int" />
+          <Property Name="D_TDS" Type="int" />
+          <Property Name="D_ESI" Type="int" />
+          <Property Name="D_PF" Type="int" />
+          <Property Name="Tax" Type="int" />
+          <Property Name="Total_Deductions" Type="int" />
+        </EntityType>
+        <EntityType Name="t_PersonalInformations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_ID" Type="int" Nullable="false" />
+          <Property Name="PassportNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Passport_Exp_Date" Type="date" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="15" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="20" />
+          <Property Name="Religion" Type="nvarchar" MaxLength="20" />
+          <Property Name="Maritalstatus" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__t_Departm__RefHR__2D27B809">
+          <End Role="HR_SignUp" Type="Self.HR_SignUp" Multiplicity="0..1" />
+          <End Role="t_Departments" Type="Self.t_Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_SignUp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_Departments">
+              <PropertyRef Name="RefHRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__t_Employe__RefHR__38996AB5">
+          <End Role="HR_SignUp" Type="Self.HR_SignUp" Multiplicity="0..1" />
+          <End Role="t_Employees" Type="Self.t_Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_SignUp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_Employees">
+              <PropertyRef Name="RefHRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__t_Persona__Emplo__49C3F6B7">
+          <End Role="t_Employees" Type="Self.t_Employees" Multiplicity="1" />
+          <End Role="t_PersonalInformations" Type="Self.t_PersonalInformations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="t_PersonalInformations">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectEMSModelStoreContainer">
+          <EntitySet Name="holidays" EntityType="Self.holidays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_SignUp" EntityType="Self.HR_SignUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Departments" EntityType="Self.t_Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Employees" EntityType="Self.t_Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_leaves" EntityType="Self.t_leaves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_payroll" EntityType="Self.t_payroll" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_PersonalInformations" EntityType="Self.t_PersonalInformations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__t_Departm__RefHR__2D27B809" Association="Self.FK__t_Departm__RefHR__2D27B809">
+            <End Role="HR_SignUp" EntitySet="HR_SignUp" />
+            <End Role="t_Departments" EntitySet="t_Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__t_Employe__RefHR__38996AB5" Association="Self.FK__t_Employe__RefHR__38996AB5">
+            <End Role="HR_SignUp" EntitySet="HR_SignUp" />
+            <End Role="t_Employees" EntitySet="t_Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__t_Persona__Emplo__49C3F6B7" Association="Self.FK__t_Persona__Emplo__49C3F6B7">
+            <End Role="t_Employees" EntitySet="t_Employees" />
+            <End Role="t_PersonalInformations" EntitySet="t_PersonalInformations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectEMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="HR_SignUp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mobileno" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="t_Departments" Relationship="Self.FK__t_Departm__RefHR__2D27B809" FromRole="HR_SignUp" ToRole="t_Departments" />
+          <NavigationProperty Name="t_Employees" Relationship="Self.FK__t_Employe__RefHR__38996AB5" FromRole="HR_SignUp" ToRole="t_Employees" />
+        </EntityType>
+        <EntityType Name="t_Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HOD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RefHRID" Type="Int32" />
+          <Property Name="Department" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HR_SignUp" Relationship="Self.FK__t_Departm__RefHR__2D27B809" FromRole="t_Departments" ToRole="HR_SignUp" />
+        </EntityType>
+        <EntityType Name="t_Employees">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefHRID" Type="Int32" />
+          <Property Name="Firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mobileno" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="JoiningDate" Type="DateTime" Precision="0" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="HR_SignUp" Relationship="Self.FK__t_Employe__RefHR__38996AB5" FromRole="t_Employees" ToRole="HR_SignUp" />
+          <NavigationProperty Name="t_PersonalInformations" Relationship="Self.FK__t_Persona__Emplo__49C3F6B7" FromRole="t_Employees" ToRole="t_PersonalInformations" />
+        </EntityType>
+        <EntityType Name="t_PersonalInformations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+          <Property Name="PassportNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Passport_Exp_Date" Type="DateTime" Precision="0" />
+          <Property Name="Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Religion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Maritalstatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="t_Employees" Relationship="Self.FK__t_Persona__Emplo__49C3F6B7" FromRole="t_PersonalInformations" ToRole="t_Employees" />
+        </EntityType>
+        <Association Name="FK__t_Departm__RefHR__2D27B809">
+          <End Role="HR_SignUp" Type="Self.HR_SignUp" Multiplicity="0..1" />
+          <End Role="t_Departments" Type="Self.t_Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_SignUp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_Departments">
+              <PropertyRef Name="RefHRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__t_Employe__RefHR__38996AB5">
+          <End Role="HR_SignUp" Type="Self.HR_SignUp" Multiplicity="0..1" />
+          <End Role="t_Employees" Type="Self.t_Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_SignUp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_Employees">
+              <PropertyRef Name="RefHRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__t_Persona__Emplo__49C3F6B7">
+          <End Role="t_Employees" Type="Self.t_Employees" Multiplicity="1" />
+          <End Role="t_PersonalInformations" Type="Self.t_PersonalInformations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="t_PersonalInformations">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectEMSEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HR_SignUp" EntityType="Self.HR_SignUp" />
+          <EntitySet Name="t_Departments" EntityType="Self.t_Departments" />
+          <EntitySet Name="t_Employees" EntityType="Self.t_Employees" />
+          <EntitySet Name="t_PersonalInformations" EntityType="Self.t_PersonalInformations" />
+          <AssociationSet Name="FK__t_Departm__RefHR__2D27B809" Association="Self.FK__t_Departm__RefHR__2D27B809">
+            <End Role="HR_SignUp" EntitySet="HR_SignUp" />
+            <End Role="t_Departments" EntitySet="t_Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__t_Employe__RefHR__38996AB5" Association="Self.FK__t_Employe__RefHR__38996AB5">
+            <End Role="HR_SignUp" EntitySet="HR_SignUp" />
+            <End Role="t_Employees" EntitySet="t_Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__t_Persona__Emplo__49C3F6B7" Association="Self.FK__t_Persona__Emplo__49C3F6B7">
+            <End Role="t_Employees" EntitySet="t_Employees" />
+            <End Role="t_PersonalInformations" EntitySet="t_PersonalInformations" />
+          </AssociationSet>
+          <EntitySet Name="holidays" EntityType="ProjectEMSModel.holiday" />
+          <EntitySet Name="t_leaves" EntityType="ProjectEMSModel.t_leaves" />
+          <EntitySet Name="t_payroll" EntityType="ProjectEMSModel.t_payroll" />
+          <EntitySet Name="sysdiagrams" EntityType="ProjectEMSModel.sysdiagram" />
+        </EntityContainer>
+        <EntityType Name="holiday">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Holidaysdate" Type="DateTime" Precision="0" />
+          <Property Name="Day" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="t_leaves">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+          <Property Name="LeaveType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <Property Name="TotalDays" Type="Int32" />
+          <Property Name="Reason" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="t_payroll">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NetSalary" Type="Double" />
+          <Property Name="E_Basic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="E_DA" Type="Int32" />
+          <Property Name="E_HRA" Type="Int32" />
+          <Property Name="E_Conveyance" Type="Int32" />
+          <Property Name="Total_Earnings" Type="Int32" />
+          <Property Name="E_Allowance" Type="Int32" />
+          <Property Name="D_TDS" Type="Int32" />
+          <Property Name="D_ESI" Type="Int32" />
+          <Property Name="D_PF" Type="Int32" />
+          <Property Name="Tax" Type="Int32" />
+          <Property Name="Total_Deductions" Type="Int32" />
+          <Property Name="Employee_Id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectEMSModelStoreContainer" CdmEntityContainer="ProjectEMSEntities1">
+          <EntitySetMapping Name="HR_SignUp">
+            <EntityTypeMapping TypeName="ProjectEMSModel.HR_SignUp">
+              <MappingFragment StoreEntitySet="HR_SignUp">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Departments">
+            <EntityTypeMapping TypeName="ProjectEMSModel.t_Departments">
+              <MappingFragment StoreEntitySet="t_Departments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HOD" ColumnName="HOD" />
+                <ScalarProperty Name="RefHRID" ColumnName="RefHRID" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Employees">
+            <EntityTypeMapping TypeName="ProjectEMSModel.t_Employees">
+              <MappingFragment StoreEntitySet="t_Employees">
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="RefHRID" ColumnName="RefHRID" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobileno" ColumnName="Mobileno" />
+                <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_PersonalInformations">
+            <EntityTypeMapping TypeName="ProjectEMSModel.t_PersonalInformations">
+              <MappingFragment StoreEntitySet="t_PersonalInformations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+                <ScalarProperty Name="Passport_Exp_Date" ColumnName="Passport_Exp_Date" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Maritalstatus" ColumnName="Maritalstatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="holidays">
+            <EntityTypeMapping TypeName="ProjectEMSModel.holiday">
+              <MappingFragment StoreEntitySet="holidays">
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Holidaysdate" ColumnName="Holidaysdate" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_leaves">
+            <EntityTypeMapping TypeName="ProjectEMSModel.t_leaves">
+              <MappingFragment StoreEntitySet="t_leaves">
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="TotalDays" ColumnName="TotalDays" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_payroll">
+            <EntityTypeMapping TypeName="ProjectEMSModel.t_payroll">
+              <MappingFragment StoreEntitySet="t_payroll">
+                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+                <ScalarProperty Name="Total_Deductions" ColumnName="Total_Deductions" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="D_PF" ColumnName="D_PF" />
+                <ScalarProperty Name="D_ESI" ColumnName="D_ESI" />
+                <ScalarProperty Name="D_TDS" ColumnName="D_TDS" />
+                <ScalarProperty Name="E_Allowance" ColumnName="E_Allowance" />
+                <ScalarProperty Name="Total_Earnings" ColumnName="Total_Earnings" />
+                <ScalarProperty Name="E_Conveyance" ColumnName="E_Conveyance" />
+                <ScalarProperty Name="E_HRA" ColumnName="E_HRA" />
+                <ScalarProperty Name="E_DA" ColumnName="E_DA" />
+                <ScalarProperty Name="E_Basic" ColumnName="E_Basic" />
+                <ScalarProperty Name="NetSalary" ColumnName="NetSalary" />
+                <ScalarProperty Name="Employee_name" ColumnName="Employee_name" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProjectEMSModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,82 @@
+﻿@model EmployeeManagementSystem.t_PersonalInformations
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>t_PersonalInformations</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PassportNo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PassportNo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Passport_Exp_Date)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Passport_Exp_Date)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Tel)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Tel)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Nationality)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Religion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Religion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Maritalstatus)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Maritalstatus)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.t_Employees.Firstname)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.t_Employees.Firstname)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

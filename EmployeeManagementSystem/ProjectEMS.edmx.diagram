@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b3a1905c91264dac9115ecb29d69fa5f" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="ProjectEMSModel.HR_SignUp" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectEMSModel.t_Departments" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectEMSModel.t_Employees" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectEMSModel.t_PersonalInformations" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="ProjectEMSModel.FK__t_Departm__RefHR__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectEMSModel.FK__t_Employe__RefHR__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectEMSModel.FK__t_Persona__Emplo__49C3F6B7" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProjectEMSModel.holiday" Width="1.5" PointX="5.75" PointY="1.625" />
+        <EntityTypeShape EntityType="ProjectEMSModel.t_leaves" Width="1.5" PointX="9.375" PointY="0.875" />
+        <EntityTypeShape EntityType="ProjectEMSModel.t_payroll" Width="1.5" PointX="9.5" PointY="4.125" />
+        <EntityTypeShape EntityType="ProjectEMSModel.sysdiagram" Width="1.5" PointX="13.25" PointY="3" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
